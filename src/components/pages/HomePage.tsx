@@ -23,10 +23,6 @@ const GridMarker = ({ className }: { className?: string }) => (
   </div>
 );
 
-const Image = ({ src, alt, className }: { src: string; alt: string; className?: string }) => (
-  <Image src={src} alt={alt} className={`block w-full h-full object-cover ${className}`} />
-);
-
 // --- SCROLL REVEAL COMPONENT (Mandatory Pattern) ---
 type AnimatedElementProps = {
   children: React.ReactNode;
@@ -189,7 +185,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-primary translate-x-4 translate-y-4 clip-sawtooth" />
                 <div className="absolute inset-0 clip-sawtooth bg-background">
                    <Image 
-                     src="https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=hero-fashion" 
+                     src="https://static.wixstatic.com/media/45a11d_3c349c6200ae497f97c106495ed70c37~mv2.png?originWidth=576&originHeight=960" 
                      alt="Modern fashion editorial shot" 
                      className="opacity-90 hover:scale-105 transition-transform duration-700"
                    />
@@ -313,7 +309,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Image 
-                  src="https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=cat-apparel" 
+                  src="https://static.wixstatic.com/media/45a11d_fec9cd9ea40445b7b51afe043b516184~mv2.png?originWidth=576&originHeight=768" 
                   alt="Apparel Category" 
                   className="grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700"
                 />
@@ -336,7 +332,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Image 
-                  src="https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=cat-objects" 
+                  src="https://static.wixstatic.com/media/45a11d_fafb0534b5b24ba3bde938f2b145a4c6~mv2.png?originWidth=576&originHeight=768" 
                   alt="Objects Category" 
                   className="grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700"
                 />
@@ -359,7 +355,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Image 
-                  src="https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=cat-tech" 
+                  src="https://static.wixstatic.com/media/45a11d_f25ce53084964500aaef82aa0362369b~mv2.png?originWidth=576&originHeight=768" 
                   alt="Tech Category" 
                   className="grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700"
                 />
@@ -382,7 +378,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Image 
-                  src="https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=cat-print" 
+                  src="https://static.wixstatic.com/media/45a11d_fe7b94820f454461a9a857df1a9d49f6~mv2.png?originWidth=576&originHeight=768" 
                   alt="Print Category" 
                   className="grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-700"
                 />
@@ -431,7 +427,7 @@ export default function HomePage() {
                       </span>
                     </div>
                     <Image 
-                      src={`https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=${product.img}`}
+                      src={'https://static.wixstatic.com/media/45a11d_6080b9207e354418b0b6b309d815360c~mv2.png?originWidth=384&originHeight=448'}
                       alt={product.name}
                       className="opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
                     />
@@ -464,7 +460,7 @@ export default function HomePage() {
                  <div className="absolute inset-0 border-2 border-primary translate-x-4 translate-y-4" />
                  <div className="absolute inset-0 bg-abstractshape/20 clip-sawtooth" />
                  <Image 
-                   src="https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=editorial-feature"
+                   src="https://static.wixstatic.com/media/45a11d_1475355b05154f83a1883e2f4817388c~mv2.png?originWidth=768&originHeight=768"
                    alt="Editorial Feature"
                    className="relative z-10 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                  />

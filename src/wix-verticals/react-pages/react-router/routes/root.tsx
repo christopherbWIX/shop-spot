@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router';
-import { useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 import { loadCurrentCartServiceConfig } from '@wix/ecom/services';
 import { loadSEOTagsServiceConfig } from '@wix/seo/services';
@@ -18,6 +18,13 @@ import {
 } from '@/components/MiniCartContextProvider';
 import { Commerce } from '@/components/ui/ecom/Commerce';
 import { SEO } from '@wix/seo/components';
+
+type CartServiceConfig = Awaited<ReturnType<typeof loadCurrentCartServiceConfig>>;
+const CartConfigContext = createContext<CartServiceConfig | null>(null);
+
+export function useCartConfig() {
+  return useContext(CartConfigContext);
+}
 
 const ReactRouterNavigationComponent: NavigationComponent = ({
   route,
@@ -53,17 +60,19 @@ export function WixServicesProvider(props: { children: React.ReactNode }) {
   return (
     <div data-testid="main-container">
       <SEO.Root seoTagsServiceConfig={seoTagsServiceConfig}>
-        <MiniCartContextProvider>
-          <Commerce.Root checkoutServiceConfig={{}}>
-            <CurrentCart currentCartServiceConfig={currentCartServiceConfig}>
-              <NavigationProvider
-                navigationComponent={ReactRouterNavigationComponent}
-              >
-                {props.children}
-              </NavigationProvider>
-            </CurrentCart>
-          </Commerce.Root>
-        </MiniCartContextProvider>
+        <CartConfigContext.Provider value={currentCartServiceConfig}>
+          <MiniCartContextProvider>
+            <Commerce.Root checkoutServiceConfig={{}}>
+              <CurrentCart currentCartServiceConfig={currentCartServiceConfig}>
+                <NavigationProvider
+                  navigationComponent={ReactRouterNavigationComponent}
+                >
+                  {props.children}
+                </NavigationProvider>
+              </CurrentCart>
+            </Commerce.Root>
+          </MiniCartContextProvider>
+        </CartConfigContext.Provider>
       </SEO.Root>
     </div>
   );
@@ -79,7 +88,7 @@ export function MiniCart({
   children?: ReactNode;
 }) {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const { currentCartServiceConfig } = useLoaderData<typeof rootRouteLoader>();
+  const currentCartServiceConfig = useCartConfig();
 
   return (
     <>
@@ -127,7 +136,6 @@ function StoreLayoutContent({
         }}
       </CartLineItemAdded>
 
-      {/* Success Message */}
       {showSuccessMessage && (
         <div className="fixed top-4 right-4 z-50 bg-status-success-medium backdrop-blur-sm text-content-primary px-6 py-3 rounded-xl shadow-lg border border-status-success animate-pulse">
           <div className="flex items-center gap-2">
@@ -149,7 +157,6 @@ function StoreLayoutContent({
         </div>
       )}
 
-      {/* Main Content */}
       {children}
     </>
   );
