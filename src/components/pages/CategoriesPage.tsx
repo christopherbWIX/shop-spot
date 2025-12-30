@@ -1,10 +1,28 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { useCategories } from '@/components/ui/store/Filter';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
+import { useEffect, useState } from 'react';
+import { loadCategoriesListServiceConfig } from '@wix/stores/services';
 
 export default function CategoriesPage() {
-  const { categories, isLoading } = useCategories();
+  const [categories, setCategories] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const config = await loadCategoriesListServiceConfig();
+        setCategories(config.categories || []);
+      } catch (error) {
+        console.error('Failed to load categories:', error);
+        setCategories([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   if (isLoading) {
     return (
