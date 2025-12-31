@@ -6,6 +6,12 @@ interface CategoryPickerProps {
   categoriesListConfig: CategoriesListServiceConfig;
 }
 
+interface CategoryRootProps {
+  category?: Category;
+  categoryServiceConfig?: CategoryServiceConfig;
+  children: React.ReactNode;
+}
+
 export function CategoryPicker({ categoriesListConfig }: CategoryPickerProps) {
   return (
 <div>
