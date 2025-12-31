@@ -8,6 +8,10 @@ interface CategoryPickerProps {
 
 export function CategoryPicker({ categoriesListConfig }: CategoryPickerProps) {
   return (
+
+    <CategoryList.Root categoriesListConfig={categoriesListConfig}>
+
+    </CategoryList.Root>
     <CategoryList.Root categoriesListConfig={categoriesListConfig}>
       <div>
         <div className="flex items-center justify-between mb-3">
