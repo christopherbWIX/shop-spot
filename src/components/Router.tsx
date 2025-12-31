@@ -19,6 +19,12 @@ import { Cart } from '@/wix-verticals/react-pages/react-router/routes/cart';
 // Import pages
 import HomePage from '@/components/pages/HomePage';
 import CategoriesPage from '@/components/pages/CategoriesPage';
+import TestCategoryPage from '@/components/pages/TestCategoryPage';
+import TestCategoryListPage from '@/components/pages/TestCategoryListPage';
+import TestProductPage from '@/components/pages/TestProductPage';
+import TestProductListPage from '@/components/pages/TestProductListPage';
+import TestOptionPage from '@/components/pages/TestOptionPage';
+import TestChoicePage from '@/components/pages/TestChoicePage';
 
 // Import layout components
 import Header from '@/components/layout/Header';
@@ -64,6 +70,30 @@ const router = createBrowserRouter([
       {
         path: "categories",
         element: <CategoriesPage />,
+      },
+      {
+        path: "test-category",
+        element: <TestCategoryPage />,
+      },
+      {
+        path: "test-category-list",
+        element: <TestCategoryListPage />,
+      },
+      {
+        path: "test-product",
+        element: <TestProductPage />,
+      },
+      {
+        path: "test-product-list",
+        element: <TestProductListPage />,
+      },
+      {
+        path: "test-option",
+        element: <TestOptionPage />,
+      },
+      {
+        path: "test-choice",
+        element: <TestChoicePage />,
       },
       {
         path: 'products/:slug',

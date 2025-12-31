@@ -507,6 +507,40 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* --- HEADLESS COMPONENTS TEST SECTION --- */}
+      <section className="relative w-full py-32 px-4 md:px-8 max-w-[120rem] mx-auto">
+        <AnimatedElement>
+          <h2 className="font-heading text-6xl md:text-7xl uppercase text-primary mb-12">
+            Headless Components<br/>Test Pages
+          </h2>
+        </AnimatedElement>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            { title: 'Test Category', path: '/test-category', description: 'Single category component example' },
+            { title: 'Test Category List', path: '/test-category-list', description: 'Multiple categories display' },
+            { title: 'Test Product', path: '/test-product', description: 'Individual product component' },
+            { title: 'Test Product List', path: '/test-product-list', description: 'Product grid and listing' },
+            { title: 'Test Option', path: '/test-option', description: 'Product option variants' },
+            { title: 'Test Choice', path: '/test-choice', description: 'Choice selection component' },
+          ].map((item, idx) => (
+            <AnimatedElement key={item.path} delay={idx * 100}>
+              <Link to={item.path} className="block group">
+                <div className="border-2 border-primary p-6 hover:bg-primary hover:text-primary-foreground transition-colors duration-300 h-full flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-heading text-xl uppercase mb-2">{item.title}</h3>
+                    <p className="font-paragraph text-sm opacity-80">{item.description}</p>
+                  </div>
+                  <div className="mt-4 flex items-center gap-2 text-sm font-heading uppercase group-hover:translate-x-2 transition-transform">
+                    View <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+              </Link>
+            </AnimatedElement>
+          ))}
+        </div>
+      </section>
+
       {/* --- CTA FOOTER --- */}
       <section className="relative w-full bg-secondary text-secondary-foreground pt-32 pb-12 px-4 md:px-8 overflow-hidden">
         <JaggedLine className="absolute top-0 left-0 w-full text-background rotate-180" />
