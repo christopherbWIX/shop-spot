@@ -1,6 +1,6 @@
-import { CategoryList, Category } from '@wix/stores/components';
-import type { CategoriesListServiceConfig } from '@wix/stores/services';
 import { Label } from '@/components/ui/label';
+import { Category, CategoryList } from '@wix/stores/components';
+import type { CategoriesListServiceConfig } from '@wix/stores/services';
 
 interface CategoryPickerProps {
   categoriesListConfig: CategoriesListServiceConfig;
@@ -9,14 +9,6 @@ interface CategoryPickerProps {
 export function CategoryPicker({ categoriesListConfig }: CategoryPickerProps) {
   return (
 <div>
-    <CategoryList.Root categoriesListConfig={categoriesListConfig}>
-        <CategoryList.CategoryRepeater>
-            <Category.Trigger>
-                <Category.Label />
-              </button>
-            </Category.Trigger>
-          </CategoryList.CategoryRepeater>
-    </CategoryList.Root>
 
 
     <CategoryList.Root categoriesListConfig={categoriesListConfig}>
