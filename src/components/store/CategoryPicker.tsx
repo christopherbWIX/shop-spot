@@ -12,7 +12,6 @@ export function CategoryPicker({ categoriesListConfig }: CategoryPickerProps) {
     <CategoryList.Root categoriesListConfig={categoriesListConfig}>
         <CategoryList.CategoryRepeater>
             <Category.Trigger>
-              <button className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground data-[selected=true]:bg-primary data-[selected=true]:text-primary-foreground data-[selected=true]:border-primary data-[selected=true]:shadow-lg data-[selected=true]:transform data-[selected=true]:scale-105">
                 <Category.Label />
               </button>
             </Category.Trigger>
