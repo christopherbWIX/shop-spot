@@ -1,21 +1,18 @@
-import { Product, ProductList } from '@wix/stores/components';
-import { loadProductsListServiceConfig } from '@wix/stores/services';
 
-// Load config (in useEffect, server component, or loader)
-const productsListConfig = await loadProductsListServiceConfig(window.location.href);
+import { loadCategoriesListServiceConfig } from '@wix/stores/services';
+import { CategoryList } from '@wix/stores/components/react';
 
-export default function TestPage() {
-  return (
-    <div className="min-h-screen bg-background">
-      // Render
-      <ProductList.Root productsListConfig={productsListConfig}>
-        <ProductList.Products>
-          <ProductList.ProductRepeater>
-            <Product.Name />
-            <Product.Price />
-          </ProductList.ProductRepeater>
-        </ProductList.Products>
-      </ProductList.Root>
-    </div>
-  );
-}
+// Load categories data during SSR
+const categoriesConfig = await loadCategoriesListServiceConfig();
+
+
+<CategoryList.Root categoriesConfig={categoriesConfig}>
+  <CategoryList.ItemContent>
+    {({ category }) => (
+      <div>
+        <h3>{category.name}</h3>
+        <p>{category.description}</p>
+      </div>
+    )}
+  </CategoryList.ItemContent>
+</CategoryList.Root>
