@@ -8,8 +8,9 @@ interface CategoryPickerProps {
 
 export function CategoryPicker({ categoriesListConfig }: CategoryPickerProps) {
   return (
-
+<div>
     <CategoryList.Root categoriesListConfig={categoriesListConfig}>
+
 
     </CategoryList.Root>
     <CategoryList.Root categoriesListConfig={categoriesListConfig}>
@@ -32,6 +33,8 @@ export function CategoryPicker({ categoriesListConfig }: CategoryPickerProps) {
         </div>
       </div>
     </CategoryList.Root>
+
+    </div>
   );
 }
 
