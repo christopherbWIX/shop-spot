@@ -19,6 +19,7 @@ import { Cart } from '@/wix-verticals/react-pages/react-router/routes/cart';
 // Import pages
 import HomePage from '@/components/pages/HomePage';
 import CategoriesPage from '@/components/pages/CategoriesPage';
+import TestPage from '@/components/pages/TestPage';
 
 // Import layout components
 import Header from '@/components/layout/Header';
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "categories",
         element: <CategoriesPage />,
+      },
+      {
+        path: "test",
+        element: <TestPage />,
       },
       {
         path: 'products/:slug',

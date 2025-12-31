@@ -34,6 +34,12 @@ export default function Header() {
             >
               Products
             </Link>
+            <Link 
+              to="/test" 
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              Test
+            </Link>
           </nav>
 
           {/* Cart Icon */}
@@ -64,6 +70,12 @@ export default function Header() {
             className="text-foreground hover:text-primary transition-colors"
           >
             Products
+          </Link>
+          <Link 
+            to="/test" 
+            className="text-foreground hover:text-primary transition-colors"
+          >
+            Test
           </Link>
         </nav>
       </div>
