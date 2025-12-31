@@ -10,9 +10,15 @@ export function CategoryPicker({ categoriesListConfig }: CategoryPickerProps) {
   return (
 <div>
     <CategoryList.Root categoriesListConfig={categoriesListConfig}>
-
-
+        <CategoryList.CategoryRepeater>
+            <Category.Trigger>
+                <Category.Label />
+              </button>
+            </Category.Trigger>
+          </CategoryList.CategoryRepeater>
     </CategoryList.Root>
+
+
     <CategoryList.Root categoriesListConfig={categoriesListConfig}>
       <div>
         <div className="flex items-center justify-between mb-3">
