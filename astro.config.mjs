@@ -8,10 +8,6 @@ import react from "@astrojs/react";
 import sourceAttrsPlugin from "@wix/babel-plugin-jsx-source-attrs";
 import dynamicDataPlugin from "@wix/babel-plugin-jsx-dynamic-data";
 import customErrorOverlayPlugin from "./vite-error-overlay-plugin.js";
-import wixPages from "@wix/astro-pages";
-import { PAGES_SUFFIX_PATH, parsePagesFromFile } from "@wix/vibe-routes-parser";
-import { join } from "node:path";
-
 const isBuild = process.env.NODE_ENV == "production";
 
 // https://astro.build/config
@@ -47,19 +43,6 @@ export default defineConfig({
     }),
     isBuild ? monitoring() : undefined,
     react({ babel: { plugins: [sourceAttrsPlugin, dynamicDataPlugin] } }),
-    {
-      name: "Watch router tsx file",
-      hooks: {
-        "astro:config:setup"({ addWatchFile }) {
-          addWatchFile(join(import.meta.dirname, PAGES_SUFFIX_PATH));
-        },
-      },
-    },
-    wixPages({
-      extendPages: async () => {
-        return parsePagesFromFile(import.meta.dirname);
-      },
-    }),
   ],
   vite: {
     plugins: [customErrorOverlayPlugin()],
