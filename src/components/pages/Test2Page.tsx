@@ -1,15 +1,21 @@
+import { Product, ProductList } from '@wix/stores/components';
+import { loadProductsListServiceConfig } from '@wix/stores/services';
 
-import { Category, CategoryList } from '@wix/stores/components';
-import { loadCategoriesListServiceConfig } from '@wix/stores/services';
-
-// Load categories data during SSR
-const categoriesListConfig = await loadCategoriesListServiceConfig();
+// Load config (in useEffect, server component, or loader)
+const productsListConfig = await loadProductsListServiceConfig(window.location.href);
 
 export default function TestPage() {
   return (
     <div className="min-h-screen bg-background">
       // Render
- 
+      <ProductList.Root productsListConfig={productsListConfig}>
+        <ProductList.Products>
+          <ProductList.ProductRepeater>
+            <Product.Name />
+            <Product.Price />
+          </ProductList.ProductRepeater>
+        </ProductList.Products>
+      </ProductList.Root>
     </div>
   );
 }
