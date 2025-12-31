@@ -2,10 +2,34 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { Option, OptionName } from '@/components/ui/store/Option';
+import { Option, OptionName, OptionChoices, OptionChoiceRepeater } from '@/components/ui/store/Option';
+import { Choice, ChoiceText, ChoiceColor } from '@/components/ui/store/Choice';
 
 export default function TestOptionPage() {
   const [selectedSize, setSelectedSize] = React.useState('M');
+  const [selectedColor, setSelectedColor] = React.useState('#004D25');
+
+  // Mock option data
+  const mockSizeOption = {
+    name: 'Size',
+    choices: [
+      { id: 'xs', text: 'XS' },
+      { id: 's', text: 'S' },
+      { id: 'm', text: 'M' },
+      { id: 'l', text: 'L' },
+      { id: 'xl', text: 'XL' },
+    ]
+  };
+
+  const mockColorOption = {
+    name: 'Color',
+    choices: [
+      { id: 'navy', color: '#004D25', text: 'Navy' },
+      { id: 'black', color: '#000000', text: 'Black' },
+      { id: 'white', color: '#FFFFFF', text: 'White' },
+      { id: 'gray', color: '#999999', text: 'Gray' },
+    ]
+  };
 
   return (
     <div className="min-h-screen bg-background text-primary py-12 px-4 md:px-8">
@@ -18,63 +42,64 @@ export default function TestOptionPage() {
         <h1 className="font-heading text-5xl md:text-6xl uppercase mb-8">Test Option Component</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
-          {/* Option Example */}
+          {/* Live Option Component Example */}
           <div className="bg-white border-2 border-primary p-8 rounded-lg">
             <h2 className="font-heading text-2xl uppercase mb-6">Option Component Example</h2>
             
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <h3 className="font-heading text-lg uppercase">Size</h3>
-                <div className="flex gap-3">
-                  {['XS', 'S', 'M', 'L', 'XL'].map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`px-4 py-2 border-2 transition-all ${
-                        selectedSize === size
-                          ? 'border-primary bg-primary text-primary-foreground'
-                          : 'border-primary/20 hover:border-primary'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
+            <div className="space-y-8">
+              {/* Size Option Example */}
+              <Option>
+                <div className="space-y-3">
+                  <OptionName className="font-heading text-lg uppercase text-primary">
+                    {mockSizeOption.name}
+                  </OptionName>
+                  <OptionChoices>
+                    <div className="flex flex-wrap gap-2">
+                      {mockSizeOption.choices.map((choice) => (
+                        <button
+                          key={choice.id}
+                          onClick={() => setSelectedSize(choice.text)}
+                          className={`px-4 py-2 border-2 transition-all font-heading text-sm uppercase ${
+                            selectedSize === choice.text
+                              ? 'border-primary bg-primary text-primary-foreground'
+                              : 'border-primary/20 hover:border-primary'
+                          }`}
+                        >
+                          {choice.text}
+                        </button>
+                      ))}
+                    </div>
+                  </OptionChoices>
+                  <p className="font-paragraph text-sm text-primary/60">Selected: {selectedSize}</p>
                 </div>
-                <p className="font-paragraph text-sm text-primary/60">Selected: {selectedSize}</p>
-              </div>
+              </Option>
 
-              <div className="space-y-3">
-                <h3 className="font-heading text-lg uppercase">Color</h3>
-                <div className="flex gap-3">
-                  {[
-                    { name: 'Black', color: '#000000' },
-                    { name: 'White', color: '#FFFFFF' },
-                    { name: 'Navy', color: '#004D25' },
-                    { name: 'Gray', color: '#999999' },
-                  ].map((item) => (
-                    <button
-                      key={item.name}
-                      className="w-10 h-10 rounded-full border-4 border-primary/20 hover:border-primary transition-all"
-                      style={{ backgroundColor: item.color }}
-                      title={item.name}
-                    />
-                  ))}
+              {/* Color Option Example */}
+              <Option>
+                <div className="space-y-3">
+                  <OptionName className="font-heading text-lg uppercase text-primary">
+                    {mockColorOption.name}
+                  </OptionName>
+                  <OptionChoices>
+                    <div className="flex gap-3">
+                      {mockColorOption.choices.map((choice) => (
+                        <button
+                          key={choice.id}
+                          onClick={() => setSelectedColor(choice.color)}
+                          className={`w-10 h-10 rounded-full border-4 transition-all ${
+                            selectedColor === choice.color
+                              ? 'border-primary ring-2 ring-primary'
+                              : 'border-primary/20 hover:border-primary'
+                          }`}
+                          style={{ backgroundColor: choice.color }}
+                          title={choice.text}
+                        />
+                      ))}
+                    </div>
+                  </OptionChoices>
+                  <p className="font-paragraph text-sm text-primary/60">Selected: {mockColorOption.choices.find(c => c.color === selectedColor)?.text}</p>
                 </div>
-              </div>
-
-              <div className="space-y-3">
-                <h3 className="font-heading text-lg uppercase">Material</h3>
-                <div className="flex gap-3 flex-wrap">
-                  {['Cotton', 'Polyester', 'Wool', 'Silk'].map((material) => (
-                    <button
-                      key={material}
-                      className="px-4 py-2 border-2 border-primary/20 hover:border-primary transition-all"
-                    >
-                      {material}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              </Option>
             </div>
           </div>
 

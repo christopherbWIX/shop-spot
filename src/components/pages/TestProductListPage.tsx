@@ -2,16 +2,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { Image } from '@/components/ui/image';
+import { ProductList as ProductListPrimitive } from '@wix/stores/components';
+import { loadProductsListServiceConfig } from '@wix/stores/services';
+import { ProductList, ProductRepeater, Products } from '@/components/ui/store/ProductList';
+import { ProductName, ProductPrice } from '@/components/ui/store/Product';
 
 export default function TestProductListPage() {
-  // Mock products for demonstration
-  const mockProducts = [
-    { id: 1, name: 'Modular Pack', price: '$120.00', tag: 'Best Seller' },
-    { id: 2, name: 'Analog Watch', price: '$250.00', tag: 'New' },
-    { id: 3, name: 'Desk Mat', price: '$45.00', tag: 'Essential' },
-    { id: 4, name: 'Type Specimen', price: '$30.00', tag: 'Print' },
-  ];
+  const [productsConfig, setProductsConfig] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const loadConfig = async () => {
+      try {
+        const config = await loadProductsListServiceConfig();
+        setProductsConfig(config);
+      } catch (error) {
+        console.error('Failed to load products config:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadConfig();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-primary py-12 px-4 md:px-8">
@@ -23,34 +35,49 @@ export default function TestProductListPage() {
 
         <h1 className="font-heading text-5xl md:text-6xl uppercase mb-8">Test Product List Component</h1>
         
-        <div className="bg-white border-2 border-primary p-8 rounded-lg mb-8">
-          <h2 className="font-heading text-2xl uppercase mb-4">Product List Example</h2>
-          <p className="font-paragraph text-sm mb-6 text-primary/80">
-            This page demonstrates the ProductList headless component from @wix/stores/components.
-            The ProductList component is used to display multiple products with filtering, sorting, and pagination.
-          </p>
-
-          {/* Product Grid Example */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {mockProducts.map((product) => (
-              <div key={product.id} className="border border-primary/20 overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-square bg-background/50 flex items-center justify-center relative">
-                  <span className="absolute top-2 left-2 bg-primary text-primary-foreground text-xs px-2 py-1 font-bold">
-                    {product.tag}
-                  </span>
-                  <Image src="https://static.wixstatic.com/media/45a11d_6080b9207e354418b0b6b309d815360c~mv2.png?originWidth=384&originHeight=448" alt={product.name} className="w-full h-full object-cover" />
-                </div>
-                <div className="p-4 border-t border-primary/20">
-                  <h3 className="font-heading text-sm uppercase mb-2">{product.name}</h3>
-                  <p className="font-paragraph text-sm font-bold">{product.price}</p>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+          {/* Live Product List Component Example */}
+          <div className="lg:col-span-2 bg-white border-2 border-primary p-8 rounded-lg">
+            <h2 className="font-heading text-2xl uppercase mb-6">Product List Example</h2>
+            
+            {loading ? (
+              <div className="flex items-center justify-center h-96">
+                <p className="font-paragraph text-sm text-primary/60">Loading products...</p>
               </div>
-            ))}
+            ) : productsConfig ? (
+              <ProductList productsListConfig={productsConfig} variant="grid">
+                <div className="space-y-6">
+                  <Products>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <ProductRepeater>
+                        <div className="border border-primary/20 p-4 rounded hover:shadow-lg transition-shadow">
+                          <div className="aspect-square bg-background/50 rounded mb-4 flex items-center justify-center">
+                            <p className="font-paragraph text-xs text-primary/60">Product Image</p>
+                          </div>
+                          <div className="space-y-2">
+                            <ProductName className="font-heading text-sm uppercase text-primary line-clamp-2" />
+                            <ProductPrice className="font-heading text-lg text-primary" />
+                            <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none py-2 font-heading text-xs uppercase">
+                              View Product
+                            </Button>
+                          </div>
+                        </div>
+                      </ProductRepeater>
+                    </div>
+                  </Products>
+                </div>
+              </ProductList>
+            ) : (
+              <div className="flex items-center justify-center h-96">
+                <p className="font-paragraph text-sm text-primary/60">No products available</p>
+              </div>
+            )}
           </div>
 
+          {/* Documentation */}
           <div className="space-y-4">
-            <div className="border border-primary/20 p-6 bg-background/50">
-              <h3 className="font-heading text-lg uppercase mb-2">Product List Component Features:</h3>
+            <div className="bg-white border-2 border-primary p-8 rounded-lg">
+              <h3 className="font-heading text-2xl uppercase mb-4">Product List Features</h3>
               <ul className="font-paragraph text-sm space-y-2 list-disc list-inside">
                 <li>Display multiple products in grid or list layout</li>
                 <li>Support for product filtering by category, price, etc.</li>
@@ -64,8 +91,8 @@ export default function TestProductListPage() {
               </ul>
             </div>
 
-            <div className="border border-primary/20 p-6 bg-background/50">
-              <h3 className="font-heading text-lg uppercase mb-2">Common Use Cases:</h3>
+            <div className="bg-white border-2 border-primary p-8 rounded-lg">
+              <h3 className="font-heading text-lg uppercase mb-4">Common Use Cases:</h3>
               <ul className="font-paragraph text-sm space-y-2 list-disc list-inside">
                 <li>Product catalog/shop pages</li>
                 <li>Category product listings</li>
@@ -76,21 +103,22 @@ export default function TestProductListPage() {
               </ul>
             </div>
 
-            <div className="border border-primary/20 p-6 bg-primary text-primary-foreground">
-              <h3 className="font-heading text-lg uppercase mb-2">Example Structure:</h3>
+            <div className="bg-primary text-primary-foreground border-2 border-primary p-8 rounded-lg">
+              <h3 className="font-heading text-lg uppercase mb-4">Example Structure:</h3>
               <pre className="font-mono text-xs overflow-x-auto">
-{`<ProductList productsListConfig={config}>
-  <Products className="grid grid-cols-4 gap-4">
-    <ProductRepeater>
-      <Product>
-        <ProductMediaGallery />
-        <ProductName />
-        <ProductPrice />
-      </Product>
-    </ProductRepeater>
+{`<ProductList 
+  productsListConfig={config}
+>
+  <Products>
+    <div className="grid">
+      <ProductRepeater>
+        <div>
+          <ProductName />
+          <ProductPrice />
+        </div>
+      </ProductRepeater>
+    </div>
   </Products>
-  <LoadMoreTrigger />
-  <Pagination />
 </ProductList>`}
               </pre>
             </div>

@@ -8,6 +8,21 @@ export default function TestChoicePage() {
   const [selectedChoice, setSelectedChoice] = React.useState('large');
   const [selectedColor, setSelectedColor] = React.useState('#004D25');
 
+  const textChoices = [
+    { id: 'small', text: 'Small' },
+    { id: 'medium', text: 'Medium' },
+    { id: 'large', text: 'Large' },
+    { id: 'xlarge', text: 'X-Large' },
+  ];
+
+  const colorChoices = [
+    { id: 'navy', color: '#004D25', text: 'Navy' },
+    { id: 'black', color: '#000000', text: 'Black' },
+    { id: 'white', color: '#FFFFFF', text: 'White' },
+    { id: 'gray', color: '#999999', text: 'Gray' },
+    { id: 'beige', color: '#D4C5B9', text: 'Beige' },
+  ];
+
   return (
     <div className="min-h-screen bg-background text-primary py-12 px-4 md:px-8">
       <div className="max-w-[120rem] mx-auto">
@@ -19,75 +34,76 @@ export default function TestChoicePage() {
         <h1 className="font-heading text-5xl md:text-6xl uppercase mb-8">Test Choice Component</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
-          {/* Choice Example */}
+          {/* Live Choice Component Example */}
           <div className="bg-white border-2 border-primary p-8 rounded-lg">
             <h2 className="font-heading text-2xl uppercase mb-6">Choice Component Example</h2>
             
             <div className="space-y-8">
               {/* Text Choices */}
               <div className="space-y-3">
-                <h3 className="font-heading text-lg uppercase">Text Choices (Size)</h3>
+                <h3 className="font-heading text-lg uppercase text-primary">Text Choices (Size)</h3>
                 <div className="flex gap-3 flex-wrap">
-                  {['small', 'medium', 'large', 'xlarge'].map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedChoice(size)}
-                      className={`px-4 py-2 border-2 transition-all font-heading uppercase text-sm ${
-                        selectedChoice === size
-                          ? 'border-primary bg-primary text-primary-foreground scale-110'
-                          : 'border-primary/20 hover:border-primary hover:scale-105'
-                      }`}
-                    >
-                      {size}
-                    </button>
+                  {textChoices.map((choice) => (
+                    <Choice key={choice.id}>
+                      <button
+                        onClick={() => setSelectedChoice(choice.id)}
+                        className={`px-4 py-2 border-2 transition-all font-heading uppercase text-sm ${
+                          selectedChoice === choice.id
+                            ? 'border-primary bg-primary text-primary-foreground scale-110'
+                            : 'border-primary/20 hover:border-primary hover:scale-105'
+                        }`}
+                      >
+                        {choice.text}
+                      </button>
+                    </Choice>
                   ))}
                 </div>
-                <p className="font-paragraph text-sm text-primary/60">Selected: {selectedChoice}</p>
+                <p className="font-paragraph text-sm text-primary/60">
+                  Selected: {textChoices.find(c => c.id === selectedChoice)?.text}
+                </p>
               </div>
 
               {/* Color Choices */}
               <div className="space-y-3">
-                <h3 className="font-heading text-lg uppercase">Color Choices</h3>
+                <h3 className="font-heading text-lg uppercase text-primary">Color Choices</h3>
                 <div className="flex gap-4">
-                  {[
-                    { name: 'Navy', color: '#004D25' },
-                    { name: 'Black', color: '#000000' },
-                    { name: 'White', color: '#FFFFFF' },
-                    { name: 'Gray', color: '#999999' },
-                    { name: 'Beige', color: '#D4C5B9' },
-                  ].map((item) => (
-                    <button
-                      key={item.name}
-                      onClick={() => setSelectedColor(item.color)}
-                      className={`w-12 h-12 rounded-full border-4 transition-all transform hover:scale-110 ${
-                        selectedColor === item.color
-                          ? 'border-primary ring-2 ring-primary scale-125'
-                          : 'border-primary/20 hover:border-primary'
-                      }`}
-                      style={{ backgroundColor: item.color }}
-                      title={item.name}
-                    />
+                  {colorChoices.map((choice) => (
+                    <Choice key={choice.id}>
+                      <button
+                        onClick={() => setSelectedColor(choice.color)}
+                        className={`w-12 h-12 rounded-full border-4 transition-all transform hover:scale-110 ${
+                          selectedColor === choice.color
+                            ? 'border-primary ring-2 ring-primary scale-125'
+                            : 'border-primary/20 hover:border-primary'
+                        }`}
+                        style={{ backgroundColor: choice.color }}
+                        title={choice.text}
+                      />
+                    </Choice>
                   ))}
                 </div>
-                <p className="font-paragraph text-sm text-primary/60">Selected: {selectedColor}</p>
+                <p className="font-paragraph text-sm text-primary/60">
+                  Selected: {colorChoices.find(c => c.color === selectedColor)?.text}
+                </p>
               </div>
 
               {/* Disabled Choices */}
               <div className="space-y-3">
-                <h3 className="font-heading text-lg uppercase">With Disabled States</h3>
+                <h3 className="font-heading text-lg uppercase text-primary">With Disabled States</h3>
                 <div className="flex gap-3 flex-wrap">
                   {['Available', 'Limited Stock', 'Out of Stock'].map((status, idx) => (
-                    <button
-                      key={status}
-                      disabled={idx === 2}
-                      className={`px-4 py-2 border-2 transition-all font-heading uppercase text-sm ${
-                        idx === 2
-                          ? 'border-primary/20 text-primary/40 cursor-not-allowed opacity-50'
-                          : 'border-primary/20 hover:border-primary'
-                      }`}
-                    >
-                      {status}
-                    </button>
+                    <Choice key={status}>
+                      <button
+                        disabled={idx === 2}
+                        className={`px-4 py-2 border-2 transition-all font-heading uppercase text-sm ${
+                          idx === 2
+                            ? 'border-primary/20 text-primary/40 cursor-not-allowed opacity-50'
+                            : 'border-primary/20 hover:border-primary'
+                        }`}
+                      >
+                        {status}
+                      </button>
+                    </Choice>
                   ))}
                 </div>
               </div>

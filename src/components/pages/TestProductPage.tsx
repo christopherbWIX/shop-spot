@@ -3,17 +3,34 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { Product, ProductName, ProductPrice, ProductDescription } from '@/components/ui/store/Product';
-import { Image } from '@/components/ui/image';
+import { ProductVariants, ProductVariantOptions, ProductVariantOptionRepeater } from '@/components/ui/store/Product';
+import { OptionName, OptionChoices, OptionChoiceRepeater } from '@/components/ui/store/Option';
+import { Choice, ChoiceText, ChoiceColor } from '@/components/ui/store/Choice';
+import { loadProductServiceConfig, ProductService } from '@wix/stores/services';
 
 export default function TestProductPage() {
-  // Mock product data for demonstration
-  const mockProduct = {
-    _id: 'test-product-1',
-    name: 'Premium Desk Lamp',
-    description: 'A sleek and modern desk lamp with adjustable brightness and color temperature.',
-    price: 89.99,
-    image: 'https://static.wixstatic.com/media/45a11d_6080b9207e354418b0b6b309d815360c~mv2.png?originWidth=384&originHeight=448',
-  };
+  const [productData, setProductData] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const loadProduct = async () => {
+      try {
+        // Load the first product from the store
+        const config = await loadProductServiceConfig();
+        const service = new ProductService(config);
+        const products = await service.getProducts({ limit: 1 });
+        
+        if (products && products.length > 0) {
+          setProductData(products[0]);
+        }
+      } catch (error) {
+        console.error('Failed to load product:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProduct();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-primary py-12 px-4 md:px-8">
@@ -26,25 +43,64 @@ export default function TestProductPage() {
         <h1 className="font-heading text-5xl md:text-6xl uppercase mb-8">Test Product Component</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
-          {/* Product Example */}
+          {/* Live Product Component Example */}
           <div className="bg-white border-2 border-primary p-8 rounded-lg">
-            <h2 className="font-heading text-2xl uppercase mb-4">Product Component Example</h2>
+            <h2 className="font-heading text-2xl uppercase mb-6">Product Component Example</h2>
             
-            <div className="space-y-6">
-              <div className="aspect-square bg-background/50 border border-primary/20 rounded flex items-center justify-center">
-                <Image src={mockProduct.image} alt={mockProduct.name} className="w-full h-full object-cover" />
+            {loading ? (
+              <div className="flex items-center justify-center h-96">
+                <p className="font-paragraph text-sm text-primary/60">Loading product data...</p>
               </div>
+            ) : productData ? (
+              <Product product={productData}>
+                <div className="space-y-6">
+                  {/* Product Name */}
+                  <div>
+                    <ProductName className="font-heading text-2xl uppercase text-primary" />
+                  </div>
 
-              <div className="space-y-3">
-                <h3 className="font-heading text-3xl uppercase">{mockProduct.name}</h3>
-                <p className="font-heading text-2xl text-primary">${mockProduct.price}</p>
-                <p className="font-paragraph text-sm text-primary/80">{mockProduct.description}</p>
+                  {/* Product Price */}
+                  <div className="flex items-baseline gap-2">
+                    <ProductPrice className="font-heading text-3xl text-primary" />
+                  </div>
+
+                  {/* Product Description */}
+                  <div>
+                    <ProductDescription className="font-paragraph text-sm text-primary/80 line-clamp-3" />
+                  </div>
+
+                  {/* Product Variants */}
+                  <ProductVariants>
+                    <ProductVariantOptions>
+                      <ProductVariantOptionRepeater>
+                        <div className="space-y-3 mb-4 border-t border-primary/20 pt-4">
+                          <OptionName className="font-heading text-sm uppercase text-primary" />
+                          <OptionChoices>
+                            <div className="flex flex-wrap gap-2">
+                              <OptionChoiceRepeater>
+                                <Choice>
+                                  <ChoiceColor className="w-8 h-8 border-2" />
+                                  <ChoiceText className="text-xs px-2 py-1" />
+                                </Choice>
+                              </OptionChoiceRepeater>
+                            </div>
+                          </OptionChoices>
+                        </div>
+                      </ProductVariantOptionRepeater>
+                    </ProductVariantOptions>
+                  </ProductVariants>
+
+                  {/* Add to Cart Button */}
+                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none py-3 font-heading uppercase mt-6">
+                    Add to Cart
+                  </Button>
+                </div>
+              </Product>
+            ) : (
+              <div className="flex items-center justify-center h-96">
+                <p className="font-paragraph text-sm text-primary/60">No product data available</p>
               </div>
-
-              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none py-3 font-heading uppercase">
-                Add to Cart
-              </Button>
-            </div>
+            )}
           </div>
 
           {/* Documentation */}
@@ -64,25 +120,40 @@ export default function TestProductPage() {
               </ul>
             </div>
 
+            <div className="bg-white border-2 border-primary p-8 rounded-lg">
+              <h3 className="font-heading text-lg uppercase mb-4">Product Sub-Components:</h3>
+              <ul className="font-paragraph text-sm space-y-2 list-disc list-inside">
+                <li><strong>ProductName:</strong> Displays product title</li>
+                <li><strong>ProductPrice:</strong> Shows current price</li>
+                <li><strong>ProductDescription:</strong> Product details</li>
+                <li><strong>ProductVariants:</strong> Size, color options</li>
+                <li><strong>ProductActionAddToCart:</strong> Add to cart button</li>
+              </ul>
+            </div>
+
             <div className="bg-primary text-primary-foreground border-2 border-primary p-8 rounded-lg">
               <h3 className="font-heading text-lg uppercase mb-4">Example Structure:</h3>
               <pre className="font-mono text-xs overflow-x-auto">
 {`<Product product={productData}>
-  <ProductMediaGallery />
   <ProductName />
   <ProductPrice />
   <ProductDescription />
   <ProductVariants>
-    <Option>
-      <OptionName />
-      <OptionChoices>
-        <Choice>
-          <ChoiceText />
-        </Choice>
-      </OptionChoices>
-    </Option>
+    <ProductVariantOptions>
+      <ProductVariantOptionRepeater>
+        <Option>
+          <OptionName />
+          <OptionChoices>
+            <OptionChoiceRepeater>
+              <Choice>
+                <ChoiceText />
+              </Choice>
+            </OptionChoiceRepeater>
+          </OptionChoices>
+        </Option>
+      </ProductVariantOptionRepeater>
+    </ProductVariantOptions>
   </ProductVariants>
-  <ProductActionAddToCart />
 </Product>`}
               </pre>
             </div>
