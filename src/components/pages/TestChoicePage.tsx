@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { Choice, ChoiceText, ChoiceColor } from '@/components/ui/store/Choice';
+import { Choice, ChoiceText, ChoiceColor } from '@wix/stores/components';
 
 export default function TestChoicePage() {
   const [selectedChoice, setSelectedChoice] = React.useState('large');

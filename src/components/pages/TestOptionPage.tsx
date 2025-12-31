@@ -2,8 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { Option, OptionName, OptionChoices, OptionChoiceRepeater } from '@/components/ui/store/Option';
-import { Choice, ChoiceText, ChoiceColor } from '@/components/ui/store/Choice';
+import {
+  Option,
+  OptionName,
+  OptionChoices,
+  OptionChoiceRepeater,
+  Choice,
+  ChoiceText,
+  ChoiceColor,
+} from '@wix/stores/components';
 
 export default function TestOptionPage() {
   const [selectedSize, setSelectedSize] = React.useState('M');

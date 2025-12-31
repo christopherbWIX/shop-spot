@@ -2,10 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { Product, ProductName, ProductPrice, ProductDescription } from '@/components/ui/store/Product';
-import { ProductVariants, ProductVariantOptions, ProductVariantOptionRepeater } from '@/components/ui/store/Product';
-import { OptionName, OptionChoices, OptionChoiceRepeater } from '@/components/ui/store/Option';
-import { Choice, ChoiceText, ChoiceColor } from '@/components/ui/store/Choice';
+import {
+  Product,
+  ProductName,
+  ProductPrice,
+  ProductDescription,
+  ProductVariants,
+  ProductVariantOptions,
+  ProductVariantOptionRepeater,
+  OptionName,
+  OptionChoices,
+  OptionChoiceRepeater,
+  Choice,
+  ChoiceText,
+  ChoiceColor,
+} from '@wix/stores/components';
 import { loadProductServiceConfig, ProductService } from '@wix/stores/services';
 
 export default function TestProductPage() {

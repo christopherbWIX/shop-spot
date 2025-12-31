@@ -2,10 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { ProductList as ProductListPrimitive } from '@wix/stores/components';
+import {
+  ProductList,
+  ProductRepeater,
+  Products,
+  ProductName,
+  ProductPrice,
+} from '@wix/stores/components';
 import { loadProductsListServiceConfig } from '@wix/stores/services';
-import { ProductList, ProductRepeater, Products } from '@/components/ui/store/ProductList';
-import { ProductName, ProductPrice } from '@/components/ui/store/Product';
 
 export default function TestProductListPage() {
   const [productsConfig, setProductsConfig] = React.useState<any>(null);
