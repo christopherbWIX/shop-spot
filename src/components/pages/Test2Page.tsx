@@ -1,10 +1,21 @@
-export default function Test2Page() {
+import { Product, ProductList } from '@wix/stores/components';
+import { loadProductsListServiceConfig } from '@wix/stores/services';
+
+// Load config (in useEffect, server component, or loader)
+const productsListConfig = await loadProductsListServiceConfig(window.location.href);
+
+export default function TestPage() {
   return (
-    <div className="min-h-screen bg-background py-12 px-8">
-      <div className="max-w-[120rem] mx-auto">
-        <h1 className="font-heading text-4xl md:text-5xl uppercase text-primary mb-8">Test 2 Page</h1>
-        <p className="font-paragraph text-foreground text-lg">Welcome to the Test 2 page.</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      // Render
+      <ProductList.Root productsListConfig={productsListConfig}>
+        <ProductList.Products>
+          <ProductList.ProductRepeater>
+            <Product.Name />
+            <Product.Price />
+          </ProductList.ProductRepeater>
+        </ProductList.Products>
+      </ProductList.Root>
     </div>
   );
 }
