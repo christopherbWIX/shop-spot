@@ -10,12 +10,8 @@ export default function TestPage() {
     <div className="min-h-screen bg-background">
       // Render
 <CategoryList.Root categoriesConfig={categoriesConfig}>
-  <CategoryList.ItemContent>
-    {({ category }) => (
-      <div>
-        <h3>{category.name}</h3>
-        <p>{category.description}</p>
-      </div>
-    )}
-  </CategoryList.ItemContent>
+
 </CategoryList.Root>
+    </div>
+  );
+}
