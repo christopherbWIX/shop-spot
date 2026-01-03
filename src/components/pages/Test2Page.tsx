@@ -43,14 +43,14 @@ export default function TestPage() {
         <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>
           Categories
         </h2>
-        <CategoryList.Root categoriesListConfig={categoriesListConfig}>
+
           <CategoryList.Loading>Loading...</CategoryList.Loading>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             <CategoryList.CategoryRepeater>
               <Category.Trigger />
             </CategoryList.CategoryRepeater>
           </div>
-        </CategoryList.Root>
+
       </div>
 
       {/* Products */}
