@@ -17,8 +17,7 @@ export default function TestPage() {
         [],
         { filter: {} }
       );
-
-      const config = await loadProductsListServiceConfig({ searchOptions }); // 👈 Note the { }
+      const config = await loadProductsListServiceConfig({ searchOptions });
       setProductsListConfig(config);
     }
 
