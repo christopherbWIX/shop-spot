@@ -35,35 +35,43 @@ export default function TestPage() {
   }
 
   return (
-  <div className="min-h-screen bg-background p-8">
+  <div style={{ minHeight: '100vh', padding: '32px' }}>
     <ProductList.Root productsListConfig={productsListConfig}>
 
-      {/* Categories Section */}
-      <div className="mb-8">
-        <h2 className="font-heading text-2xl mb-4">Categories</h2>
+      {/* Categories */}
+      <div style={{ marginBottom: '32px' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>
+          Categories
+        </h2>
         <CategoryList.Root categoriesListConfig={categoriesListConfig}>
-          <CategoryList.Loading>Loading categories...</CategoryList.Loading>
-          <div className="flex flex-wrap gap-2">
+          <CategoryList.Loading>Loading...</CategoryList.Loading>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             <CategoryList.CategoryRepeater>
-              <Category.Trigger asChild>
-                <button className="px-4 py-2 rounded-lg bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
-                  <Category.Label />
-                </button>
-              </Category.Trigger>
+              <Category.Trigger />
             </CategoryList.CategoryRepeater>
           </div>
         </CategoryList.Root>
       </div>
 
-      {/* Products Section */}
+      {/* Products */}
       <div>
-        <h2 className="font-heading text-2xl mb-4">Products</h2>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>
+          Products
+        </h2>
         <ProductList.Products>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '24px'
+          }}>
             <ProductList.ProductRepeater>
-              <div className="p-4 border border-foreground/10 rounded-lg bg-secondary">
-                <Product.Name className="font-heading text-lg mb-2" />
-                <Product.Price className="text-primary font-paragraph" />
+              <div style={{
+                padding: '16px',
+                border: '1px solid #e0e0e0',
+                borderRadius: '8px'
+              }}>
+                <Product.Name />
+                <Product.Price />
               </div>
             </ProductList.ProductRepeater>
           </div>
