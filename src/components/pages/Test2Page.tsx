@@ -7,7 +7,6 @@ const productsListConfig = await loadProductsListServiceConfig(window.location.h
 
 
 import {
-  loadCategoriesListServiceConfig,
   parseUrlToSearchOptions,
 } from '@wix/stores/services';
 
