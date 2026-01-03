@@ -41,10 +41,11 @@ export default function TestPage() {
         <CategoryList.Root categoriesListConfig={categoriesListConfig}>
           <CategoryList.Loading>Loading...</CategoryList.Loading>
             <CategoryList.CategoryRepeater>
-              <Category.Label />
               <Category.Trigger />
           </CategoryList.CategoryRepeater>
         </CategoryList.Root>
+
+        <div/>
 
         <ProductList.Products>
           <ProductList.ProductRepeater>
