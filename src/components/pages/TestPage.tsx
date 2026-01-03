@@ -45,8 +45,7 @@ export default function TestPage() {
         </h2>
         <CategoryList.Root categoriesListConfig={categoriesListConfig}>
           <CategoryList.Loading>Loading...</CategoryList.Loading>
-          <div style={{ display: 'grid',
-            gap: '10px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             <CategoryList.CategoryRepeater>
               <Category.Trigger />
             </CategoryList.CategoryRepeater>
