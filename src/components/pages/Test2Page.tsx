@@ -1,30 +1,36 @@
 import { Product, ProductList } from '@wix/stores/components';
-import { loadProductsListServiceConfig } from '@wix/stores/services';
-
-
-
-
-
 import {
+  loadProductsListServiceConfig,
   parseUrlToSearchOptions,
+  ProductsListServiceConfig
 } from '@wix/stores/services';
-
-
-const { searchOptions } = await parseUrlToSearchOptions(
-  window.location.href,
-  [],              // no categories
-  [],              // no customizations
-  { filter: {} }   // safe default
-);
-
-
-// Load config (in useEffect, server component, or loader)
-const productsListConfig = await loadProductsListServiceConfig(searchOptions);
+import { useEffect, useState } from 'react';
 
 export default function TestPage() {
+  const [productsListConfig, setProductsListConfig] = useState<ProductsListServiceConfig | null>(null);
+
+  useEffect(() => {
+    async function loadConfig() {
+      const { searchOptions } = await parseUrlToSearchOptions(
+        window.location.href,
+        [],
+        [],
+        { filter: {} }
+      );
+
+      const config = await loadProductsListServiceConfig({ searchOptions }); // 👈 Note the { }
+      setProductsListConfig(config);
+    }
+
+    loadConfig();
+  }, []);
+
+  if (!productsListConfig) {
+    return <div className="min-h-screen bg-background">Loading...</div>;
+  }
+
   return (
     <div className="min-h-screen bg-background">
-      // Render
       <ProductList.Root productsListConfig={productsListConfig}>
         <ProductList.Products>
           <ProductList.ProductRepeater>
