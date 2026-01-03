@@ -6,9 +6,9 @@ import {
   ProductsListServiceConfig
 } from '@wix/stores/services';
 
+import { Category, CategoryList } from "@wix/headless-stores/react";
 import { loadCategoriesListServiceConfig } from '@wix/stores/services';
-const categoriesConfig = await loadCategoriesListServiceConfig();
-import { CategoryList } from "@wix/headless-stores/react";
+const categoriesListConfig = await loadCategoriesListServiceConfig();
 
 import { useEffect, useState } from 'react';
 
