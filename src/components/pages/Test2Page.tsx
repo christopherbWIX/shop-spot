@@ -10,7 +10,6 @@ import {
   parseUrlToSearchOptions,
 } from '@wix/stores/services';
 
-let request.url = window.location.href;
 
 // Step 3: Parse URL with YOUR defaults
 const parsedSearchOptions = await parseUrlToSearchOptions(
