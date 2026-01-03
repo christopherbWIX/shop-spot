@@ -1,20 +1,61 @@
-import { ProductList, Product } from '@wix/stores/components';
-import { loadProductsListServiceConfig } from '@wix/stores/services';
+import { Product, ProductList } from '@wix/stores/components';
 
-// Load config (in useEffect, server component, or loader)
-const productsListConfig = await loadProductsListServiceConfig(window.location.href);
+import {
+  loadProductsListServiceConfig,
+  parseUrlToSearchOptions,
+  ProductsListServiceConfig
+} from '@wix/stores/services';
+
+import { Category, CategoryList } from "@wix/headless-stores/react";
+import { loadCategoriesListServiceConfig } from '@wix/stores/services';
+const categoriesListConfig = await loadCategoriesListServiceConfig();
+
+import { useEffect, useState } from 'react';
 
 export default function TestPage() {
+  const [productsListConfig, setProductsListConfig] = useState<ProductsListServiceConfig | null>(null);
+
+  useEffect(() => {
+    async function loadConfig() {
+      const { searchOptions } = await parseUrlToSearchOptions(
+        window.location.href,
+        [],
+        [],
+        { filter: {} }
+      );
+      const config = await loadProductsListServiceConfig({ searchOptions });
+      setProductsListConfig(config);
+    }
+
+    loadConfig();
+  }, []);
+
+  if (!productsListConfig) {
+    return <div className="min-h-screen bg-background">Loading...</div>;
+  }
+
   return (
     <div className="min-h-screen bg-background">
-      // Render
       <ProductList.Root productsListConfig={productsListConfig}>
+
+        <CategoryList.Root categoriesListConfig={categoriesListConfig}>
+          <CategoryList.Loading>Loading...</CategoryList.Loading>
+            <CategoryList.CategoryRepeater>
+              <Category.Label />
+              <Category.Trigger />
+          </CategoryList.CategoryRepeater>
+        </CategoryList.Root>
+
         <ProductList.Products>
           <ProductList.ProductRepeater>
             <Product.Name />
             <Product.Price />
           </ProductList.ProductRepeater>
         </ProductList.Products>
+
+
+
+
       </ProductList.Root>
     </div>
   );
