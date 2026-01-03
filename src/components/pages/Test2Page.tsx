@@ -6,7 +6,9 @@ import {
   ProductsListServiceConfig
 } from '@wix/stores/services';
 
+import { loadCategoriesListServiceConfig } from '@wix/stores/services';
 
+const categoriesConfig = await loadCategoriesListServiceConfig();
 
 
 import { useEffect, useState } from 'react';
