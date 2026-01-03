@@ -49,6 +49,7 @@ export default function TestPage() {
           <CategoryList.Loading>Loading...</CategoryList.Loading>
             <CategoryList.CategoryRepeater>
               <Category.Label />
+              <Category.Trigger />
           </CategoryList.CategoryRepeater>
         </CategoryList.Root>
 
