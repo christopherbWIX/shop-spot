@@ -37,6 +37,15 @@ export default function TestPage() {
   return (
     <div className="min-h-screen bg-background">
       <ProductList.Root productsListConfig={productsListConfig}>
+
+        <CategoryList.Root categoriesListConfig={categoriesListConfig}>
+          <CategoryList.Loading>Loading...</CategoryList.Loading>
+            <CategoryList.CategoryRepeater>
+              <Category.Label />
+              <Category.Trigger />
+          </CategoryList.CategoryRepeater>
+        </CategoryList.Root>
+
         <ProductList.Products>
           <ProductList.ProductRepeater>
             <Product.Name />
@@ -45,13 +54,7 @@ export default function TestPage() {
         </ProductList.Products>
 
 
-         <CategoryList.Root categoriesListConfig={categoriesListConfig}>
-          <CategoryList.Loading>Loading...</CategoryList.Loading>
-            <CategoryList.CategoryRepeater>
-              <Category.Label />
-              <Category.Trigger />
-          </CategoryList.CategoryRepeater>
-        </CategoryList.Root>
+
 
       </ProductList.Root>
     </div>
