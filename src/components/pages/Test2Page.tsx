@@ -14,17 +14,8 @@ let request.url = window.location.href;
 
 // Step 3: Parse URL with YOUR defaults
 const parsedSearchOptions = await parseUrlToSearchOptions(
-  request.url,                           // the URL to parse
-  categoriesListConfig.categories,       // categories list
-  customizations,                        // customizations
-  {                                      // 👈 YOUR DEFAULTS
-    cursorPaging: { limit: 20 },
-    filter: {
-      'allCategoriesInfo.categories': {
-        $matchItems: [{ _id: selectedCategory._id! }],
-      },
-    },
-  }
+  window.location.href,                           // the URL to parse
+  { filter: {} }
 );
 
 
