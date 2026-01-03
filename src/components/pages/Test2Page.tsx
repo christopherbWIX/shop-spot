@@ -1,8 +1,7 @@
 import { Product, ProductList } from '@wix/stores/components';
 import { loadProductsListServiceConfig } from '@wix/stores/services';
 
-// Load config (in useEffect, server component, or loader)
-const productsListConfig = await loadProductsListServiceConfig(window.location.href);
+
 
 
 
@@ -11,12 +10,16 @@ import {
 } from '@wix/stores/services';
 
 
-// Step 3: Parse URL with YOUR defaults
-const parsedSearchOptions = await parseUrlToSearchOptions(
-  window.location.href,                           // the URL to parse
-  { filter: {} }
+const { searchOptions } = await parseUrlToSearchOptions(
+  window.location.href,
+  [],              // no categories
+  [],              // no customizations
+  { filter: {} }   // safe default
 );
 
+
+// Load config (in useEffect, server component, or loader)
+const productsListConfig = await loadProductsListServiceConfig(searchOptions);
 
 export default function TestPage() {
   return (
