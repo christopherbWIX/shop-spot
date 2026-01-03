@@ -6,6 +6,11 @@ const productsListConfig = await loadProductsListServiceConfig(window.location.h
 
 
 
+import {
+  loadCategoriesListServiceConfig,
+  parseUrlToSearchOptions,
+} from '@wix/stores/services';
+
 // Step 3: Parse URL with YOUR defaults
 const parsedSearchOptions = await parseUrlToSearchOptions(
   request.url,                           // the URL to parse
