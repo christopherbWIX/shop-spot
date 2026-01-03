@@ -35,29 +35,51 @@ export default function TestPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <ProductList.Root productsListConfig={productsListConfig}>
+  <div style={{ minHeight: '100vh', padding: '32px' }}>
+    <ProductList.Root productsListConfig={productsListConfig}>
 
+      {/* Categories */}
+      <div style={{ marginBottom: '32px' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>
+          Categories
+        </h2>
         <CategoryList.Root categoriesListConfig={categoriesListConfig}>
           <CategoryList.Loading>Loading...</CategoryList.Loading>
+          <div style={{ display: 'grid',
+            gap: '10px' }}>
             <CategoryList.CategoryRepeater>
               <Category.Trigger />
-          </CategoryList.CategoryRepeater>
+            </CategoryList.CategoryRepeater>
+          </div>
         </CategoryList.Root>
+      </div>
 
-        <div/>
-
+      {/* Products */}
+      <div>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>
+          Products
+        </h2>
         <ProductList.Products>
-          <ProductList.ProductRepeater>
-            <Product.Name />
-            <Product.Price />
-          </ProductList.ProductRepeater>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '24px'
+          }}>
+            <ProductList.ProductRepeater>
+              <div style={{
+                padding: '16px',
+                border: '1px solid #e0e0e0',
+                borderRadius: '8px'
+              }}>
+                <Product.Name />
+                <Product.Price />
+              </div>
+            </ProductList.ProductRepeater>
+          </div>
         </ProductList.Products>
+      </div>
 
-
-
-
-      </ProductList.Root>
-    </div>
-  );
+    </ProductList.Root>
+  </div>
+);
 }
