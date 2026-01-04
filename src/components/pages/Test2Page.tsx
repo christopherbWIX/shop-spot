@@ -10,6 +10,8 @@ import { Category, CategoryList } from "@wix/headless-stores/react";
 import { loadCategoriesListServiceConfig } from '@wix/stores/services';
 const categoriesListConfig = await loadCategoriesListServiceConfig();
 
+import { Option } from "@wix/stores/components";
+
 import { useEffect, useState } from 'react';
 
 export default function TestPage() {
