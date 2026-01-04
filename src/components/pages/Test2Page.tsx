@@ -14,10 +14,8 @@ import {
   ProductsListServiceConfig
 } from '@wix/stores/services';
 
-import { customizationsV3 } from '@wix/stores';
 
 const categoriesListConfig = await loadCategoriesListServiceConfig();
-const { items: customizations = [] } = await customizationsV3.queryCustomizations().find();
 
 import { useEffect, useState } from 'react';
 
