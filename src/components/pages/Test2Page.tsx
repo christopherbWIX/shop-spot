@@ -1,16 +1,20 @@
-import { Product, ProductList } from '@wix/stores/components';
+import {
+  Category,
+  CategoryList,
+  Choice,
+  Option,
+  Product,
+  ProductList
+} from '@wix/stores/components';
 
 import {
+  loadCategoriesListServiceConfig,
   loadProductsListServiceConfig,
   parseUrlToSearchOptions,
   ProductsListServiceConfig
 } from '@wix/stores/services';
 
-import { Category, CategoryList } from "@wix/headless-stores/react";
-import { loadCategoriesListServiceConfig } from '@wix/stores/services';
 const categoriesListConfig = await loadCategoriesListServiceConfig();
-
-import { Choice, Option } from "@wix/stores/components";
 
 import { useEffect, useState } from 'react';
 
@@ -76,20 +80,18 @@ export default function TestPage() {
                 <Product.Price />
 
                 <Product.Variants>
-                      <Product.VariantOptions>
-                        <div className="flex gap-1">
-                          <Product.VariantOptionRepeater>
-                              <Option.Choices>
-                                <div className="flex gap-1">
-                                  <Option.ChoiceRepeater>
-                                    <Choice.Color className="w-6 h-6 rounded-full border-2 cursor-pointer hover:scale-110 transition-transform" />
-                                  </Option.ChoiceRepeater>
-                                </div>
-                              </Option.Choices>
-                          </Product.VariantOptionRepeater>
-                        </div>
-                      </Product.VariantOptions>
-                    </Product.Variants>
+                <Product.VariantOptions>
+                  <Product.VariantOptionRepeater>
+                    <Option.Name className="text-lg font-medium mb-3" />
+                    <Option.Choices>
+                      <Option.ChoiceRepeater>
+                        <Choice.Text className="px-4 py-2 border rounded-lg" />
+                        <Choice.Color className="w-10 h-10 rounded-full border-4" />
+                      </Option.ChoiceRepeater>
+                    </Option.Choices>
+                  </Product.VariantOptionRepeater>
+                </Product.VariantOptions>
+              </Product.Variants>
 
               </div>
             </ProductList.ProductRepeater>
