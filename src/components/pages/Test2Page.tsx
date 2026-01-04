@@ -29,7 +29,7 @@ export default function TestPage() {
       const { searchOptions } = await parseUrlToSearchOptions(
         window.location.href,
         categoriesListConfig.categories,
-        customizations,
+        [],
         { filter: {} }
       );
       const config = await loadProductsListServiceConfig({ searchOptions });
