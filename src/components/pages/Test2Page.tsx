@@ -72,6 +72,27 @@ export default function TestPage() {
               }}>
                 <Product.Name />
                 <Product.Price />
+                <ProductVariants>
+                                          <ProductVariantOptions>
+                                            <div className="mb-3 space-y-2">
+                                              <ProductVariantOptionRepeater>
+                                                <div className="space-y-2">
+                                                  <OptionName className="text-content-secondary text-xs font-medium uppercase tracking-wide" />
+                                                  <OptionChoices>
+                                                    <div className="flex flex-wrap gap-1.5">
+                                                      <OptionChoiceRepeater>
+                                                        <>
+                                                          <ChoiceColor className="w-7 h-7 border-2" />
+                                                          <ChoiceText className="text-xs" />
+                                                        </>
+                                                      </OptionChoiceRepeater>
+                                                    </div>
+                                                  </OptionChoices>
+                                                </div>
+                                              </ProductVariantOptionRepeater>
+                                            </div>
+                                          </ProductVariantOptions>
+                                        </ProductVariants>
               </div>
             </ProductList.ProductRepeater>
           </div>
