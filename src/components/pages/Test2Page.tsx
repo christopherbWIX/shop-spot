@@ -72,6 +72,7 @@ export default function TestPage() {
               }}>
                 <Product.Name />
                 <Product.Price />
+
                 <Product.VariantOptions emptyState={<div>No options</div>}>
                   <div className="options-container">
                     <Product.VariantOptionRepeater>
@@ -79,6 +80,7 @@ export default function TestPage() {
                     </Product.VariantOptionRepeater>
                   </div>
                 </Product.VariantOptions>
+
               </div>
             </ProductList.ProductRepeater>
           </div>
