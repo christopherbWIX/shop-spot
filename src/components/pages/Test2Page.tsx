@@ -45,21 +45,19 @@ export default function TestPage() {
 
   return (
   <div style={{ minHeight: '100vh', padding: '32px' }}>
-    <ProductList.Root productsListConfig={productsListConfig}>
+    <ProductList.Root productsListConfig={productsListConfig} categoriesListConfig={categoriesListConfig}>
 
       {/* Categories */}
       <div style={{ marginBottom: '32px' }}>
         <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>
           Categories
         </h2>
-
-          <CategoryList.Loading>Loading...</CategoryList.Loading>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-            <CategoryList.CategoryRepeater>
-              <Category.Trigger />
-            </CategoryList.CategoryRepeater>
-          </div>
-
+        <CategoryList.Loading>Loading...</CategoryList.Loading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+          <CategoryList.CategoryRepeater>
+            <Category.Trigger />
+          </CategoryList.CategoryRepeater>
+        </div>
       </div>
 
       {/* Products */}
