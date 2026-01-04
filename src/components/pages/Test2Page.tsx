@@ -72,7 +72,9 @@ export default function TestPage() {
               }}>
                 <Product.Name />
                 <Product.Price />
-                <Product.VariantOptionRepeater />;
+                <Product.VariantOptionRepeater >
+
+                <Product.VariantOptionRepeater />
               </div>
             </ProductList.ProductRepeater>
           </div>
