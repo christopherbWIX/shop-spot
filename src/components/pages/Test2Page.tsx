@@ -34,6 +34,22 @@ export default function TestPage() {
     return <div className="min-h-screen bg-background">Loading...</div>;
   }
 
+
+import {
+  ProductCompareAtPrice,
+  ProductDescription,
+  ProductMediaGallery,
+  ProductName,
+  ProductPrice,
+  ProductSlug,
+  ProductRibbon,
+  ProductStock,
+  ProductVariantOptionRepeater,
+  ProductVariantOptions,
+  ProductVariants,
+  ProductVariantSelectorReset,
+} from '@/components/ui/store/Product';
+
   return (
   <div style={{ minHeight: '100vh', padding: '32px' }}>
     <ProductList.Root productsListConfig={productsListConfig}>
