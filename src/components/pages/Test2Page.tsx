@@ -76,24 +76,18 @@ export default function TestPage() {
                 <Product.Price />
 
                 <Product.Variants>
-                  <Product.VariantOptions>
-                    <Product.VariantOptionRepeater>
-                      <div className="space-y-2 mb-4">
-                        <Option.Name className="text-lg font-medium" />
-                        <Option.Choices>
-                          <div className="flex flex-wrap gap-2">
-                            <Option.ChoiceRepeater>
-                              <>
-                                <Choice.Color className="w-10 h-10 rounded-full border-4" />
-                                <Choice.Text className="px-4 py-2 border rounded-lg" />
-                              </>
-                            </Option.ChoiceRepeater>
-                          </div>
-                        </Option.Choices>
-                      </div>
-                    </Product.VariantOptionRepeater>
-                  </Product.VariantOptions>
-                </Product.Variants>
+                <Product.VariantOptions>
+                  <Product.VariantOptionRepeater>
+                    <Option.Name className="text-lg font-medium mb-3" />
+                    <Option.Choices>
+                      <Option.ChoiceRepeater>
+                        <Choice.Text className="px-4 py-2 border rounded-lg" />
+                        <Choice.Color className="w-10 h-10 rounded-full border-4" />
+                      </Option.ChoiceRepeater>
+                    </Option.Choices>
+                  </Product.VariantOptionRepeater>
+                </Product.VariantOptions>
+              </Product.Variants>
 
               </div>
             </ProductList.ProductRepeater>
