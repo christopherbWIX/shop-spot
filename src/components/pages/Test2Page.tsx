@@ -28,7 +28,7 @@ export default function TestPage() {
     async function loadConfig() {
       const { searchOptions } = await parseUrlToSearchOptions(
         window.location.href,
-        categoriesListConfig.categories,
+        [],
         [],
         { filter: {} }
       );
