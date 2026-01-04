@@ -34,22 +34,6 @@ export default function TestPage() {
     return <div className="min-h-screen bg-background">Loading...</div>;
   }
 
-
-import {
-  ProductCompareAtPrice,
-  ProductDescription,
-  ProductMediaGallery,
-  ProductName,
-  ProductPrice,
-  ProductSlug,
-  ProductRibbon,
-  ProductStock,
-  ProductVariantOptionRepeater,
-  ProductVariantOptions,
-  ProductVariants,
-  ProductVariantSelectorReset,
-} from '@/components/ui/store/Product';
-
   return (
   <div style={{ minHeight: '100vh', padding: '32px' }}>
     <ProductList.Root productsListConfig={productsListConfig}>
@@ -88,27 +72,7 @@ import {
               }}>
                 <Product.Name />
                 <Product.Price />
-                <ProductVariants>
-                                          <ProductVariantOptions>
-                                            <div className="mb-3 space-y-2">
-                                              <ProductVariantOptionRepeater>
-                                                <div className="space-y-2">
-                                                  <OptionName className="text-content-secondary text-xs font-medium uppercase tracking-wide" />
-                                                  <OptionChoices>
-                                                    <div className="flex flex-wrap gap-1.5">
-                                                      <OptionChoiceRepeater>
-                                                        <>
-                                                          <ChoiceColor className="w-7 h-7 border-2" />
-                                                          <ChoiceText className="text-xs" />
-                                                        </>
-                                                      </OptionChoiceRepeater>
-                                                    </div>
-                                                  </OptionChoices>
-                                                </div>
-                                              </ProductVariantOptionRepeater>
-                                            </div>
-                                          </ProductVariantOptions>
-                                        </ProductVariants>
+                
               </div>
             </ProductList.ProductRepeater>
           </div>
