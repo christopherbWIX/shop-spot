@@ -14,8 +14,10 @@ import {
   ProductsListServiceConfig
 } from '@wix/stores/services';
 
+import { customizationsV3 } from '@wix/stores';
 
 const categoriesListConfig = await loadCategoriesListServiceConfig();
+const { items: customizations = [] } = await customizationsV3.queryCustomizations().find();
 
 import { useEffect, useState } from 'react';
 
@@ -26,8 +28,8 @@ export default function TestPage() {
     async function loadConfig() {
       const { searchOptions } = await parseUrlToSearchOptions(
         window.location.href,
-        [],
-        [],
+        categoriesListConfig.categories,
+        customizations,
         { filter: {} }
       );
       const config = await loadProductsListServiceConfig({ searchOptions });
@@ -43,21 +45,19 @@ export default function TestPage() {
 
   return (
   <div style={{ minHeight: '100vh', padding: '32px' }}>
-    <ProductList.Root productsListConfig={productsListConfig}>
+    <ProductList.Root productsListConfig={productsListConfig} categoriesListConfig={categoriesListConfig}>
 
       {/* Categories */}
       <div style={{ marginBottom: '32px' }}>
         <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>
           Categories
         </h2>
-        <CategoryList.Root categoriesListConfig={categoriesListConfig}>
-          <CategoryList.Loading>Loading...</CategoryList.Loading>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-            <CategoryList.CategoryRepeater>
-              <Category.Trigger />
-            </CategoryList.CategoryRepeater>
-          </div>
-        </CategoryList.Root>
+        <CategoryList.Loading>Loading...</CategoryList.Loading>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+          <CategoryList.CategoryRepeater>
+            <Category.Trigger />
+          </CategoryList.CategoryRepeater>
+        </div>
       </div>
 
       {/* Products */}
@@ -81,26 +81,18 @@ export default function TestPage() {
                 <Product.Price />
 
                 <Product.Variants>
-                  <Product.VariantOptions>
-                    <div className="mb-3 space-y-2">
-                      <Product.VariantOptionRepeater>
-                        <div className="space-y-2">
-                          <Option.Name className="text-lg font-medium" />
-                          <Option.Choices>
-                            <div className="flex flex-wrap gap-2">
-                              <Option.ChoiceRepeater>
-                                <>
-                                  <Choice.Color className="w-10 h-10 rounded-full border-4" />
-                                  <Choice.Text className="px-4 py-2 border rounded-lg" />
-                                </>
-                              </Option.ChoiceRepeater>
-                            </div>
-                          </Option.Choices>
-                        </div>
-                      </Product.VariantOptionRepeater>
-                    </div>
-                  </Product.VariantOptions>
-                </Product.Variants>
+                <Product.VariantOptions>
+                  <Product.VariantOptionRepeater>
+                    <Option.Name className="text-lg font-medium mb-3" />
+                    <Option.Choices>
+                      <Option.ChoiceRepeater>
+                        <Choice.Text className="px-4 py-2 border rounded-lg" />
+                        <Choice.Color className="w-10 h-10 rounded-full border-4" />
+                      </Option.ChoiceRepeater>
+                    </Option.Choices>
+                  </Product.VariantOptionRepeater>
+                </Product.VariantOptions>
+              </Product.Variants>
 
               </div>
             </ProductList.ProductRepeater>
