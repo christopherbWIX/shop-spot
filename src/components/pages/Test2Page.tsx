@@ -1,20 +1,23 @@
 import {
+  Product,
+  ProductList,
   Category,
   CategoryList,
   Choice,
-  Option,
-  Product,
-  ProductList
+  Option
 } from '@wix/stores/components';
 
 import {
-  loadCategoriesListServiceConfig,
   loadProductsListServiceConfig,
+  loadCategoriesListServiceConfig,
   parseUrlToSearchOptions,
   ProductsListServiceConfig
 } from '@wix/stores/services';
 
+import { customizationsV3 } from '@wix/stores';
+
 const categoriesListConfig = await loadCategoriesListServiceConfig();
+const { items: customizations = [] } = await customizationsV3.queryCustomizations().find();
 
 import { useEffect, useState } from 'react';
 
@@ -26,7 +29,7 @@ export default function TestPage() {
       const { searchOptions } = await parseUrlToSearchOptions(
         window.location.href,
         categoriesListConfig.categories,
-        [],
+        customizations,
         { filter: {} }
       );
       const config = await loadProductsListServiceConfig({ searchOptions });
