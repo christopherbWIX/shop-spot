@@ -1,15 +1,15 @@
 import {
-  Product,
-  ProductList,
   Category,
   CategoryList,
   Choice,
-  Option
+  Option,
+  Product,
+  ProductList
 } from '@wix/stores/components';
 
 import {
-  loadProductsListServiceConfig,
   loadCategoriesListServiceConfig,
+  loadProductsListServiceConfig,
   parseUrlToSearchOptions,
   ProductsListServiceConfig
 } from '@wix/stores/services';
