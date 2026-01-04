@@ -10,7 +10,7 @@ import { Category, CategoryList } from "@wix/headless-stores/react";
 import { loadCategoriesListServiceConfig } from '@wix/stores/services';
 const categoriesListConfig = await loadCategoriesListServiceConfig();
 
-import { Choice, Option } from "@wix/stores/components";
+import { Option } from "@wix/stores/components";
 
 import { useEffect, useState } from 'react';
 
@@ -78,13 +78,7 @@ export default function TestPage() {
                 <Product.Variants>
                 <Product.VariantOptions>
                   <Product.VariantOptionRepeater>
-                    <Option.Name className="text-lg font-medium mb-3" />
-                    <Option.Choices>
-                      <Option.ChoiceRepeater>
-                        <Choice.Text className="px-4 py-2 border rounded-lg" />
-                        <Choice.Color className="w-10 h-10 rounded-full border-4" />
-                      </Option.ChoiceRepeater>
-                    </Option.Choices>
+                    <Option.Name/>
                   </Product.VariantOptionRepeater>
                 </Product.VariantOptions>
               </Product.Variants>
