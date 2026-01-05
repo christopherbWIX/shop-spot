@@ -61,7 +61,7 @@ export default function TestPage() {
               <div className="flex items-center gap-2 p-2 border rounded">
                 <Category.Trigger className="px-3 py-1 bg-primary text-primary-foreground rounded" />
                 <Category.Label className="text-sm" />
-                <Category.ID className="sr-only" />
+                <Category.ID className="text-sm" />
 
                 {/* Category.Raw - Access full category data with asChild */}
                 <Category.Raw asChild>
@@ -70,10 +70,14 @@ export default function TestPage() {
                       <span
                         ref={ref}
                         {...props}
-                        className="text-xs"
-                      >
-                        {isSelected ? '✓' : ''}
-                      </span>
+                        style={{
+                          display: 'inline-block',
+                          width: '16px',
+                          height: '16px',
+                          borderRadius: '50%',
+                          backgroundColor: isSelected ? '#22c55e' : '#e5e7eb'
+                        }}
+                      />
                     )
                   )}
                 </Category.Raw>
