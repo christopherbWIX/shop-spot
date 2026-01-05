@@ -65,7 +65,7 @@ export default function TestPage() {
 
                 {/* Category.Raw - Access full category data with asChild */}
                 <Category.Raw asChild>
-                  {React.forwardRef<HTMLSpanElement, { category: any; isSelected: boolean }>(
+                  {React.forwardRef<HTMLSpanElement, { category: { slug?: string | null }; isSelected: boolean }>(
                     ({ category, isSelected, ...props }, ref) => (
                       <span
                         ref={ref}
