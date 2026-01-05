@@ -1,13 +1,20 @@
-import { Product, ProductList } from '@wix/stores/components';
+import {
+  Category,
+  CategoryList,
+  Choice,
+  Option,
+  Product,
+  ProductList
+} from '@wix/stores/components';
 
 import {
+  loadCategoriesListServiceConfig,
   loadProductsListServiceConfig,
   parseUrlToSearchOptions,
   ProductsListServiceConfig
 } from '@wix/stores/services';
 
-import { Category, CategoryList } from "@wix/headless-stores/react";
-import { loadCategoriesListServiceConfig } from '@wix/stores/services';
+
 const categoriesListConfig = await loadCategoriesListServiceConfig();
 
 import { useEffect, useState } from 'react';
@@ -72,6 +79,57 @@ export default function TestPage() {
               }}>
                 <Product.Name />
                 <Product.Price />
+
+                {/* Variants - Size, Color choices */}
+                <Product.Variants>
+                  <Product.VariantOptions>
+                    <div className="mb-3 space-y-2">
+                      <Product.VariantOptionRepeater>
+                        <div className="space-y-2">
+                          <Option.Name className="text-lg font-medium" />
+                          <Option.Choices>
+                            <div className="flex flex-wrap gap-2">
+                              <Option.ChoiceRepeater>
+                                <>
+                                  <Choice.Color className="w-10 h-10 rounded-full border-4" />
+                                  <Choice.Text className="px-4 py-2 border rounded-lg" />
+                                </>
+                              </Option.ChoiceRepeater>
+                            </div>
+                          </Option.Choices>
+                        </div>
+                      </Product.VariantOptionRepeater>
+                    </div>
+                  </Product.VariantOptions>
+                </Product.Variants>
+
+                {/* Modifiers - Custom text inputs, mandatory fields */}
+                <Product.Modifiers>
+                  <Product.ModifierOptions>
+                    <div className="mb-3 space-y-2">
+                      <Product.ModifierOptionRepeater>
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-1">
+                            <Option.Name className="text-lg font-medium" />
+                            <Option.MandatoryIndicator className="text-red-500" />
+                          </div>
+                          <Option.Choices>
+                            <div className="flex flex-wrap gap-2">
+                              <Option.ChoiceRepeater>
+                                <>
+                                  <Choice.Color className="w-10 h-10 rounded-full border-4" />
+                                  <Choice.Text className="px-4 py-2 border rounded-lg" />
+                                  <Choice.FreeText className="p-2 border rounded-lg w-full" placeholder="Enter custom text..." />
+                                </>
+                              </Option.ChoiceRepeater>
+                            </div>
+                          </Option.Choices>
+                        </div>
+                      </Product.ModifierOptionRepeater>
+                    </div>
+                  </Product.ModifierOptions>
+                </Product.Modifiers>
+
               </div>
             </ProductList.ProductRepeater>
           </div>
