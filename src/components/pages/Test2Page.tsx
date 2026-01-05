@@ -17,7 +17,7 @@ import {
 
 const categoriesListConfig = await loadCategoriesListServiceConfig();
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function TestPage() {
   const [productsListConfig, setProductsListConfig] = useState<ProductsListServiceConfig | null>(null);
@@ -61,24 +61,9 @@ export default function TestPage() {
               <div className="flex items-center gap-2 p-2 border rounded">
                 <Category.Trigger className="px-3 py-1 bg-primary text-primary-foreground rounded" />
                 <Category.Label className="text-sm" />
-                <Category.ID className="sr-only" />
+                <Category.ID className="text-sm" />
 
-                {/* Category.Raw - Access full category data with asChild */}
-                <Category.Raw asChild>
-                  {React.forwardRef<HTMLSpanElement, { category: { slug?: string | null }; isSelected: boolean }>(
-                    ({ category, isSelected, ...props }, ref) => (
-                      <span
-                        ref={ref}
-                        {...props}
-                        data-slug={category.slug}
-                        data-selected={isSelected}
-                        className="text-xs text-secondary-foreground"
-                      >
-                        ({category.slug})
-                      </span>
-                    )
-                  )}
-                </Category.Raw>
+
               </div>
             </CategoryList.CategoryRepeater>
           </div>
