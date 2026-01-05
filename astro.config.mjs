@@ -21,16 +21,8 @@ export default defineConfig({
           if (command === "dev") {
             injectScript(
               "page",
-              `const version = new URLSearchParams(location.search).get('framewire');
-              if (version){
-                const localUrl = 'http://localhost:3202/framewire/index.mjs';
-                const cdnUrl = \`https://static.parastorage.com/services/framewire/\${version}/index.mjs\`;
-                const url = version === 'local' ? localUrl : cdnUrl;
-                const framewireModule = await import(/* @vite-ignore */ url);
-                globalThis.framewire = framewireModule;
-                framewireModule.init({}, import.meta.hot);
-                console.log('Framewire initialized');
-              }`,
+              `import loadFramewire from "framewire.js";
+              loadFramewire(true);`
             );
           }
         },
