@@ -65,17 +65,19 @@ export default function TestPage() {
 
                 {/* Category.Raw - Access full category data with asChild */}
                 <Category.Raw asChild>
-                  {React.forwardRef(({ category, isSelected, ...props }, ref) => (
-                    <span
-                      ref={ref}
-                      {...props}
-                      data-slug={category.slug}
-                      data-selected={isSelected}
-                      className="text-xs text-secondary-foreground"
-                    >
-                      ({category.slug})
-                    </span>
-                  ))}
+                  {React.forwardRef<HTMLSpanElement, { category: any; isSelected: boolean }>(
+                    ({ category, isSelected, ...props }, ref) => (
+                      <span
+                        ref={ref}
+                        {...props}
+                        data-slug={category.slug}
+                        data-selected={isSelected}
+                        className="text-xs text-secondary-foreground"
+                      >
+                        ({category.slug})
+                      </span>
+                    )
+                  )}
                 </Category.Raw>
               </div>
             </CategoryList.CategoryRepeater>
