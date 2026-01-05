@@ -17,7 +17,7 @@ import {
 
 const categoriesListConfig = await loadCategoriesListServiceConfig();
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function TestPage() {
   const [productsListConfig, setProductsListConfig] = useState<ProductsListServiceConfig | null>(null);
@@ -63,24 +63,8 @@ export default function TestPage() {
                 <Category.Label className="text-sm" />
                 <Category.ID className="text-sm" />
 
-                {/* Category.Raw - Access full category data with asChild */}
-                <Category.Raw asChild>
-                  {React.forwardRef<HTMLSpanElement, { category: { _id?: string | null }; isSelected: boolean }>(
-                    ({ isSelected, ...props }, ref) => (
-                      <span
-                        ref={ref}
-                        {...props}
-                        style={{
-                          display: 'inline-block',
-                          width: '16px',
-                          height: '16px',
-                          borderRadius: '50%',
-                          backgroundColor: isSelected ? '#22c55e' : '#e5e7eb'
-                        }}
-                      />
-                    )
-                  )}
-                </Category.Raw>
+                {/* Category.Raw - Default renders hidden JSON, visible here for testing */}
+                <Category.Raw className="text-xs text-secondary-foreground" />
               </div>
             </CategoryList.CategoryRepeater>
           </div>
