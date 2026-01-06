@@ -96,7 +96,7 @@ export default function TestPage() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             <CategoryList.CategoryRepeater>
               <div className="flex items-center gap-2 p-2 border rounded">
-                <Category.Trigger className="px-3 py-1 bg-primary text-primary-foreground rounded" />
+                <Category.Trigger className="px-3 py-1 bg-secondary text-secondary-foreground rounded data-[selected=true]:bg-primary data-[selected=true]:text-primary-foreground" />
                 <Category.Label className="text-sm" />
                 <Category.ID className="text-sm" />
 
